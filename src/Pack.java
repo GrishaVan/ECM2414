@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Pack {
-    
+
     private ArrayList<Card> cardPack;
     private int packSize;
 
@@ -19,8 +19,8 @@ public class Pack {
     public String toString() {
         return "This pack contains " + getPack() + " of size " + getPackSize();
     }
-    
-    public Pack(String textFile) throws IOException{
+
+    public Pack(String textFile) throws IOException {
         File pack = new File(textFile);
         Scanner myReader = new Scanner(pack);
         while (myReader.hasNextLine()) {

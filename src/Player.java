@@ -3,10 +3,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-import Pack.CardDeck;
-
 public class Player {
-    
+
     private int playerNum;
     private ArrayList<Card> playerHand;
 
@@ -21,7 +19,7 @@ public class Player {
     public boolean checkWin() {
         Card n = playerHand.get(0);
         int value = n.getValue();
-        for(int i = 1; i < 4; i++) {
+        for (int i = 1; i < 4; i++) {
             if (value != playerHand.get(i).getValue()) {
                 return false;
             }
