@@ -8,7 +8,7 @@ public class Card {
     }
 
     public String toString() {
-        return "This card has a vlue of" + getValue();
+        return "value: " + getValue();
     }
 
     public Card(int value) {

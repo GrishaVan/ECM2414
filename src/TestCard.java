@@ -15,5 +15,4 @@ public class TestCard {
     public void testGetValue() {
         assertTrue(card0.getValue() == 1);
     }
-
 }
