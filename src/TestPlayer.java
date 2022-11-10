@@ -1,5 +1,7 @@
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+
 import org.junit.*;
 
 public class TestPlayer {
@@ -30,7 +32,7 @@ public class TestPlayer {
     }
 
     @Test
-    public void testCheckWin() {
+    public void testCheckWin() throws IOException {
         assertTrue(player0.checkWin() == false);
     }
 

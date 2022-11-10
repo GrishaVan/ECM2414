@@ -4,15 +4,15 @@ import org.junit.*;
 
 public class TestPack {
 
-    private Pack pack0;
+    private Pack pack;
 
     @Before
     public void setUp() throws IOException {
-        this.pack0 = new Pack("/Packs/pack1.txt");
+        this.pack = new Pack("pack1.txt");
     }
 
     @Test
     public void testGetPack() {
-        assertTrue(pack0.getPack().size() == 0);
+        assertTrue(pack.getPack().size()==0);
     }
 }
