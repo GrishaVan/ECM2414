@@ -7,14 +7,13 @@ import java.util.Scanner;
 public class Pack {
 
     private static ArrayList<Card> cardPack;
-    private int packSize;
 
     public ArrayList<Card> getPack() {
         return Pack.cardPack;
     }
 
     public int getPackSize() {
-        return this.packSize;
+        return cardPack.size();
     }
 
     public String toString() {
@@ -23,27 +22,32 @@ public class Pack {
 
     public Pack(String textFile) throws IOException {
         Pack.cardPack = new ArrayList<Card>();
-        try{
+        try {
             Scanner scanner = new Scanner(new File(textFile));
-            while (scanner.hasNextLine()){
+            while (scanner.hasNextLine()) {
                 int val = Integer.parseInt(scanner.nextLine());
                 Pack.cardPack.add(new Card(val));
             }
             scanner.close();
-        }
-        catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
+
     public static class CardDeck {
 
         private ArrayList<Card> deck;
         private int deckNum;
         private String fileName;
 
-        public int getDeckNum(){
+        public int getDeckNum() {
             return deckNum;
         }
+
+        public ArrayList<Card> getDeck() {
+            return deck;
+        }
+
         public void addCardPack() {
             Card card = cardPack.get(0);
             deck.add(card);
@@ -63,7 +67,7 @@ public class Pack {
         public CardDeck(int num) {
             this.deck = new ArrayList<Card>();
             this.deckNum = num;
-            this.fileName = "deck"+num + "_output.txt";
+            this.fileName = "deck" + num + "_output.txt";
         }
     }
 }
