@@ -6,18 +6,21 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public class Player {
+public class Player implements Runnable {
 
     private int playerNum;
     private ArrayList<Card> playerHand;
     private String fileName;
+    private boolean win;
+    private Pack.CardDeck draw;
+    private Pack.CardDeck disc;
 
-    public void log(String msg) throws IOException{
+    public void log(String msg) throws IOException {
         FileWriter newFile = new FileWriter(fileName);
         newFile.write(msg);
         newFile.close();
     }
-    
+
     public int getPLayerNum() {
         return this.playerNum;
     }
@@ -26,24 +29,25 @@ public class Player {
         return this.playerHand;
     }
 
-    public boolean checkWin() throws IOException {
+    public void checkWin() throws IOException {
         Card n = playerHand.get(0);
         int value = n.getValue();
         for (int i = 1; i < 4; i++) {
             if (value != playerHand.get(i).getValue()) {
-                return false;
+                win = false;
+                return;
             }
         }
         String msg = "Player " + playerNum + " wins";
         log(msg);
-        return true;
+        win = true;
     }
 
     public String toString() {
         return "Player number is " + getPLayerNum() + " players current hand is " + getPlayerHand();
     }
 
-    public void cardDrawDisc(Pack.CardDeck draw, Pack.CardDeck disc) throws IOException {
+    public synchronized void cardDrawDisc() throws IOException {
         ArrayList<Card> unwanted = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             Card n = playerHand.get(i);
@@ -55,22 +59,44 @@ public class Player {
         Card cardToGo = unwanted.get(0);
         disc.addCardDeck(cardToGo);
         playerHand.remove(cardToGo);
-        String discmsg = "Player " + playerNum + " discards a "+cardToGo.getValue()+" to deck "+disc.getDeckNum();
+        String discmsg = "Player " + playerNum + " discards a " + cardToGo.getValue() + " to deck " + disc.getDeckNum();
         log(discmsg);
 
         Card card = draw.topCard();
         playerHand.add(card);
-        String drawmsg = "Player " + playerNum + " draws a "+card.getValue()+" from deck "+draw.getDeckNum();
+        String drawmsg = "Player " + playerNum + " draws a " + card.getValue() + " from deck " + draw.getDeckNum();
         log(drawmsg);
     }
 
-    public void fillHand(Card card){
+    public void fillHand(Card card) {
         playerHand.add(card);
     }
 
-    public Player(int playerNum) {
+    public Player(int playerNum, Pack.CardDeck draw, Pack.CardDeck disc) {
         this.playerNum = playerNum;
         this.playerHand = new ArrayList<Card>();
-        this.fileName = "player"+playerNum + "_output.txt";
+        this.fileName = "player" + playerNum + "_output.txt";
+        this.win = false;
+        this.draw = draw;
+        this.disc = disc;
+    }
+
+    @Override
+    public void run() {
+        while (win == false) {
+            try {
+                cardDrawDisc();
+                checkWin();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            this.wait();
+            this.
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
