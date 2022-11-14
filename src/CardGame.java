@@ -58,7 +58,7 @@ public class CardGame {
         }
         boolean valid = createPack(file, playerNum);
         while (!valid) {
-            System.out.println("File location or size of pack is invalid");
+            System.out.println("File location or size of pack is invalid\nPlease enter another");
             if (scanner.hasNextLine()) {
                 file = scanner.next();
                 valid = createPack(file, playerNum);
@@ -91,9 +91,6 @@ public class CardGame {
                 pack.getPack().remove(0);
             }
         }
-        for(int i=0;i<players.size();i++){
-            System.out.println(""+ players.get(i).getPlayerNum() + players.get(i).getPlayerHand());
-        }
     }
 
     public void declareWin(int winner) throws IOException {
@@ -118,5 +115,11 @@ public class CardGame {
         this.players = new ArrayList<Player>();
         this.decks = new ArrayList<Pack.CardDeck>();
         this.gameRunning = true;
+    }
+
+    public static void main(String args[]) throws IOException{
+        CardGame game = new CardGame();
+        game.initializeGame();
+        game.runGame();
     }
 }

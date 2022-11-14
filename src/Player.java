@@ -103,7 +103,7 @@ public class Player extends Thread {
 
     @Override
     public void run() {
-        logs+="Player "+playerNum+" initial hand "+getPlayerHand()+"\n"+"\n";
+        logs+="Player "+playerNum+" initial hand "+elements()+"\n"+"\n";
         while(winner==0){
             try {
                 cardDrawDisc();
@@ -118,7 +118,7 @@ public class Player extends Thread {
                 logs+=msg+"\n";
             }
             else{
-                String msg = "Player " + winner + " has informed "+playerNum + " that player"+winner+" has won"+"\nPlayer "+playerNum+ " exits"+"\nPlayer "+playerNum+" final hand: "+elements();
+                String msg = "Player " + winner + " has informed "+playerNum + " that player "+winner+" has won"+"\nPlayer "+playerNum+ " exits"+"\nPlayer "+playerNum+" final hand: "+elements();
                 logs+=msg+"\n";
             }
             log();
