@@ -1,1 +1,1 @@
-deck3 contents: 5 9 5 9 10 7 
+deck3 contents: 6 8 5 9 7 

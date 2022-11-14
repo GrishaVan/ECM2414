@@ -35,6 +35,10 @@ public class Player extends Thread {
         this.winner=winner;
     }
 
+    public int getWinner(){
+        return winner;
+    }
+
     public String elements(){
         String elements ="";
         for(int i=0;i<getPlayerHand().size();i++){
