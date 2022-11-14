@@ -1,6 +1,7 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Users\\awaom\\%JUNIT_HOME%\\junit-4.10.jar"
+        "c:\\Users\\awaom\\%JUNIT_HOME%\\junit-4.10.jar",
+        "/Users/grygoriy/Desktop/Junit/junit-4.10.jar"
     ]
 }
