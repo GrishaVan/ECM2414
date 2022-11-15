@@ -29,7 +29,7 @@ public class Player extends Thread {
     }
 
     /**
-     * Function that returns the plaeyr number
+     * Function that returns the player number
      * 
      * @return int value of the player number
      */
@@ -40,7 +40,7 @@ public class Player extends Thread {
     /**
      * Function that returns the cards in the player hand
      * 
-     * @return the cards in the player hand
+     * @return ArrayList of the cards in the players hand
      */
     public ArrayList<Card> getPlayerHand() {
         return this.playerHand;
@@ -65,9 +65,10 @@ public class Player extends Thread {
     }
 
     /**
-     * Function that creates a string of the contents of the plaeyr hand
+     * Function that creates a string of the contents of the player's hand
+     * Format "1 2 3 4 "
      * 
-     * @return a string of the player hand contents
+     * @return a string of the player's hand contents
      */
     public String elements(){
         String elements ="";
@@ -111,7 +112,7 @@ public class Player extends Thread {
     }
 
     /**
-     * Synchronized method to draw and discrad cards
+     * Synchronized method to draw and discard cards
      * 
      * @throws IOException cannot log
      */
@@ -153,7 +154,7 @@ public class Player extends Thread {
     /**
      * Function that adds a card to a player hand
      * 
-     * @param card the crad to be added to the player hand
+     * @param card the card to be added to the player hand
      */
     public void fillHand(Card card) {
         playerHand.add(card);
@@ -185,9 +186,9 @@ public class Player extends Thread {
     public void run() {
         // Logs the player initial hand
         logs+="Player "+playerNum+" initial hand "+elements()+"\n"+"\n";
-        // While there is no wiiner in the game
+        // While there is no winner in the game
         while(winner==0){
-            // Try drawing/discrading cards then checking if hand is winning
+            // Try drawing/discarding cards then checking if hand is winning
             try {
                 cardDrawDisc();
                 checkWin();
@@ -195,14 +196,14 @@ public class Player extends Thread {
                 e.printStackTrace();
             }
         }
-        // Try logging every player action after game finishes
+        // Try logging every player's actions after game finishes
         try {
-            // Cehking which player has won the game
+            // If the player logging has won
             if (winner==playerNum){
                 String msg = "Player " + playerNum + " wins"+"\nPlayer "+playerNum+ " exits"+"\nPlayer "+playerNum+" final hand: "+elements();
                 logs+=msg+"\n";
             }
-            // Winner notifies the losing players
+            // If another player has one
             else{
                 String msg = "Player " + winner + " has informed "+playerNum + " that player "+winner+" has won"+"\nPlayer "+playerNum+ " exits"+"\nPlayer "+playerNum+" final hand: "+elements();
                 logs+=msg+"\n";

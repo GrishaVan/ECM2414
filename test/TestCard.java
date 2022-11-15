@@ -1,4 +1,4 @@
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.*;
 
@@ -13,6 +13,6 @@ public class TestCard {
 
     @Test
     public void testGetValue() {
-        assertTrue(card0.getValue() == 1);
+        assertEquals(card0.getValue(),1);
     }
 }

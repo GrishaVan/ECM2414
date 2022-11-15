@@ -7,7 +7,6 @@ public class CardGame {
     private ArrayList<Player> players;
     private ArrayList<Pack.CardDeck> decks;
     private Pack pack;
-    private volatile boolean gameRunning;
 
     /**
      * Function that returns every player in the game
@@ -16,6 +15,15 @@ public class CardGame {
      */
     public ArrayList<Player> getPlayers(){
         return players;
+    }
+
+    /**
+     * Function that returns every deck in the game
+     * 
+     * @return an ArrayList with every deck in the game
+     */
+    public ArrayList<Pack.CardDeck> getDecks(){
+        return decks;
     }
 
     public void createFile(Player player) throws IOException {
@@ -184,7 +192,6 @@ public class CardGame {
     public CardGame() {
         this.players = new ArrayList<Player>();
         this.decks = new ArrayList<Pack.CardDeck>();
-        this.gameRunning = true;
     }
     
     public static void main(String args[]) throws IOException{

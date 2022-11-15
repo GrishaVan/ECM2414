@@ -15,7 +15,7 @@ public class Pack {
      * @return an ArrayList of the cards in the pack
      */
     public ArrayList<Card> getPack() {
-        return Pack.cardPack;
+        return cardPack;
     }
 
     /**
@@ -84,27 +84,18 @@ public class Pack {
         }
 
         /**
-         * Function that adds the bottom card from the pack to the deck
-         */
-        public void addCardPack() {
-            // Last card will be the first in the ArrayList
-            Card card = cardPack.get(0);
-            deck.add(card);
-        }
-
-        /**
          * Function that adds a card to the card deck
          * 
-         * @param card the crad to be added to the deck
+         * @param card the card to be added to the deck
          */
         public void addCardDeck(Card card) {
             deck.add(card);
         }
 
         /**
-         * Function that returns rhe top card of the deck
+         * Function that takes the top card from the the deck and returns it
          * 
-         * @return the top card of the crad deck
+         * @return the top card of the card deck
          */
         public Card topCard() {
             Card card = deck.get(0);
@@ -113,7 +104,7 @@ public class Pack {
         }
 
         /**
-         * Function that logs the actions of the card deck
+         * Function that logs the final state of the card deck
          * 
          * @throws IOException cant write to a file
          */

@@ -53,26 +53,26 @@ public class TestPlayer {
 
     @Test
     public void testGetPlayerNum() {
-        assertTrue(player1.getPlayerNum() == 1);
+        assertEquals(player1.getPlayerNum() , 1);
     }
 
     @Test
     public void testGetPlayerHand() {
-        assertTrue(player1.getPlayerHand().size() == 4);
+        assertEquals(player1.getPlayerHand().size() , 4);
         for(int i=0;i<4;i++){
-            assertTrue(player1.getPlayerHand().get(i).getValue()==correct1[i]);
+            assertEquals(player1.getPlayerHand().get(i).getValue(),correct1[i]);
         }
     }
 
     @Test
     public void testGetWinner() {
-    assertTrue(player1.getWinner()==0);
+    assertEquals(player1.getWinner(),0);
     }
 
     @Test
     public void testSetWin() {
         player1.setWin(1);
-        assertTrue(player1.getWinner()==1);
+        assertEquals(player1.getWinner(),1);
         player1.setWin(0);
     }
 
@@ -83,23 +83,23 @@ public class TestPlayer {
 
     @Test
     public void testCheckWin() throws IOException{
-        assertTrue(player1.getWinner()==0);
-        assertTrue(player2.getWinner()==0);
+        assertEquals(player1.getWinner(),0);
+        assertEquals(player2.getWinner(),0);
         player1.checkWin();
         player2.checkWin();
-        assertTrue(player1.getWinner()==0);
-        assertTrue(player2.getWinner()==2);
+        assertEquals(player1.getWinner(),0);
+        assertEquals(player2.getWinner(),2);
     }
 
     @Test
     public void testCardDrawDisc() throws IOException{
         player3.cardDrawDisc();
-        assertTrue(deck.getDeck().size()==3);
-        assertTrue(invalidDeck.getDeck().size()==2);
+        assertEquals(deck.getDeck().size(),3);
+        assertEquals(invalidDeck.getDeck().size(),2);
         assertEquals(player3.elements(),"3 3 3 1 ");
         player1.cardDrawDisc();
-        assertTrue(deck.getDeck().size()==3);
-        assertTrue(invalidDeck.getDeck().size()==2);
+        assertEquals(deck.getDeck().size(),3);
+        assertEquals(invalidDeck.getDeck().size(),2);
         assertEquals(player1.elements(),"1 2 3 4 ");
     }
 
@@ -107,5 +107,16 @@ public class TestPlayer {
     public void testFillHand(){
         player1.fillHand(new Card(3));
         assertEquals(player1.elements(),"1 2 3 4 3 ");
+        player1.getPlayerHand().remove(4);
+    }
+
+    @After
+    public void cleanUp(){
+        player1=null;
+        player2=null;
+        player3=null;
+        correct1=null;
+        deck=null;
+        invalidDeck=null;
     }
 }
