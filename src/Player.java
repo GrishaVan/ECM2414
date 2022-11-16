@@ -1,9 +1,6 @@
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class Player extends Thread {
@@ -51,8 +48,8 @@ public class Player extends Thread {
      * 
      * @param winner int value of the player number that won
      */
-    public void setWin(int winner){
-        this.winner=winner;
+    public void setWin(int winner) {
+        this.winner = winner;
     }
 
     /**
@@ -60,7 +57,7 @@ public class Player extends Thread {
      * 
      * @return int of the player number that won
      */
-    public int getWinner(){
+    public int getWinner() {
         return winner;
     }
 
@@ -70,12 +67,12 @@ public class Player extends Thread {
      * 
      * @return a string of the player's hand contents
      */
-    public String elements(){
-        String elements ="";
+    public String elements() {
+        String elements = "";
         // For loop that goes through every card in the plaeyr hand
-        for(int i=0;i<getPlayerHand().size();i++){
+        for (int i = 0; i < getPlayerHand().size(); i++) {
             // Adds the value of each card to the final string
-            elements+= getPlayerHand().get(i).getValue()+" ";
+            elements += getPlayerHand().get(i).getValue() + " ";
         }
         return elements;
     }
@@ -99,7 +96,7 @@ public class Player extends Thread {
         System.out.println("Player " + playerNum + " wins");
         // Player declares win and tells the other players
         game.declareWin(playerNum);
-        this.winner=playerNum;
+        this.winner = playerNum;
     }
 
     /**
@@ -118,7 +115,7 @@ public class Player extends Thread {
      */
     public synchronized void cardDrawDisc() throws IOException {
         // Check that deck has 4 cards before anything for thread safety
-        if (draw.getDeck().size()<4){
+        if (draw.getDeck().size() < 4) {
             return;
         }
         ArrayList<Card> unwanted = new ArrayList<>();
@@ -139,16 +136,16 @@ public class Player extends Thread {
         playerHand.remove(cardToGo);
         // Adding player discrad action for the log later
         String discmsg = "Player " + playerNum + " discards a " + cardToGo.getValue() + " to deck " + disc.getDeckNum();
-        logs+=discmsg+"\n";
+        logs += discmsg + "\n";
         // Player draws top crad from the draw deck
         Card card = draw.topCard();
         playerHand.add(card);
         // Adding player draw action for the log later
         String drawmsg = "Player " + playerNum + " draws a " + card.getValue() + " from deck " + draw.getDeckNum();
-        logs+=drawmsg+"\n";
+        logs += drawmsg + "\n";
         // Adding player current hand for the log later
         String msg = "Player " + playerNum + " current hand is " + elements();
-        logs+=msg+"\n\n";
+        logs += msg + "\n\n";
     }
 
     /**
@@ -164,9 +161,9 @@ public class Player extends Thread {
      * Player class object constructor
      * 
      * @param playerNum the player number
-     * @param draw the card deck to draw from
-     * @param disc the card deck to discrad to
-     * @param game the game the player is participating in
+     * @param draw      the card deck to draw from
+     * @param disc      the card deck to discrad to
+     * @param game      the game the player is participating in
      */
     public Player(int playerNum, Pack.CardDeck draw, Pack.CardDeck disc, CardGame game) {
         this.playerNum = playerNum;
@@ -176,7 +173,7 @@ public class Player extends Thread {
         this.disc = disc;
         this.game = game;
         this.winner = 0;
-        this.logs="";
+        this.logs = "";
     }
 
     /**
@@ -185,9 +182,9 @@ public class Player extends Thread {
     @Override
     public void run() {
         // Logs the player initial hand
-        logs+="Player "+playerNum+" initial hand "+elements()+"\n"+"\n";
+        logs += "Player " + playerNum + " initial hand " + elements() + "\n" + "\n";
         // While there is no winner in the game
-        while(winner==0){
+        while (winner == 0) {
             // Try drawing/discarding cards then checking if hand is winning
             try {
                 cardDrawDisc();
@@ -199,14 +196,16 @@ public class Player extends Thread {
         // Try logging every player's actions after game finishes
         try {
             // If the player logging has won
-            if (winner==playerNum){
-                String msg = "Player " + playerNum + " wins"+"\nPlayer "+playerNum+ " exits"+"\nPlayer "+playerNum+" final hand: "+elements();
-                logs+=msg+"\n";
+            if (winner == playerNum) {
+                String msg = "Player " + playerNum + " wins" + "\nPlayer " + playerNum + " exits" + "\nPlayer "
+                        + playerNum + " final hand: " + elements();
+                logs += msg + "\n";
             }
             // If another player has one
-            else{
-                String msg = "Player " + winner + " has informed "+playerNum + " that player "+winner+" has won"+"\nPlayer "+playerNum+ " exits"+"\nPlayer "+playerNum+" final hand: "+elements();
-                logs+=msg+"\n";
+            else {
+                String msg = "Player " + winner + " has informed " + playerNum + " that player " + winner + " has won"
+                        + "\nPlayer " + playerNum + " exits" + "\nPlayer " + playerNum + " final hand: " + elements();
+                logs += msg + "\n";
             }
             // Log every player action
             log();
@@ -215,4 +214,3 @@ public class Player extends Thread {
         }
     }
 }
-

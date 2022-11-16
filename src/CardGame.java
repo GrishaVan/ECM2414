@@ -13,7 +13,7 @@ public class CardGame {
      * 
      * @return an ArrayList with every player in the game
      */
-    public ArrayList<Player> getPlayers(){
+    public ArrayList<Player> getPlayers() {
         return players;
     }
 
@@ -22,10 +22,16 @@ public class CardGame {
      * 
      * @return an ArrayList with every deck in the game
      */
-    public ArrayList<Pack.CardDeck> getDecks(){
+    public ArrayList<Pack.CardDeck> getDecks() {
         return decks;
     }
 
+    /**
+     * Function that creates a log output file for the player
+     *
+     * @param player the player for which to create the file
+     * @throws IOException if file cannot be created
+     */
     public void createFile(Player player) throws IOException {
         String name = "player" + player.getPlayerNum() + "_output.txt";
         File newFile = new File(name);
@@ -49,12 +55,12 @@ public class CardGame {
     /**
      * Function to create a player in the game
      * 
-     * @param num the player number
+     * @param num  the player number
      * @param draw the card deck from which the player will draw
      * @param disc the crad deck to which the player will discard
      */
     public void createPlayer(int num, Pack.CardDeck draw, Pack.CardDeck disc) {
-        players.add(new Player(num, draw, disc,this));
+        players.add(new Player(num, draw, disc, this));
     }
 
     /**
@@ -69,10 +75,10 @@ public class CardGame {
     /**
      * Function to create a pack of cards in the game
      * 
-     * @param fileName file which contains the value for the crads
+     * @param fileName  file which contains the value for the crads
      * @param playerNum the number of players
      * @return true if created successfully, false otherwise
-     * @throws IOException if file pathname is incorrect 
+     * @throws IOException if file pathname is incorrect
      */
     public boolean createPack(String fileName, int playerNum) throws IOException {
         File file = new File(fileName);
@@ -126,10 +132,10 @@ public class CardGame {
             // Check if last player
             if (i != playerNum - 1) {
                 // Lats player discards to deck 1
-                Player player = new Player(i + 1, decks.get(i), decks.get(i + 1),this);
+                Player player = new Player(i + 1, decks.get(i), decks.get(i + 1), this);
                 players.add(player);
             } else {
-                Player player = new Player(i + 1, decks.get(i), decks.get(0),this);
+                Player player = new Player(i + 1, decks.get(i), decks.get(0), this);
                 players.add(player);
             }
         }
@@ -147,7 +153,7 @@ public class CardGame {
             // For loop that goes through every card deck to fill 1 by 1
             for (int w = 0; w < players.size(); w++) {
                 decks.get(w).addCardDeck(pack.getPack().get(0));
-                // Remove distributed card from the pack 
+                // Remove distributed card from the pack
                 pack.getPack().remove(0);
             }
         }
@@ -161,11 +167,11 @@ public class CardGame {
      */
     public void declareWin(int winner) throws IOException {
         // For loop tells evryplayer who the winner is
-        for (int i=0;i<players.size();i++){
+        for (int i = 0; i < players.size(); i++) {
             players.get(i).setWin(winner);
         }
         // For loop that logs the cards in the deck at the end of game
-        for (int i=0;i<decks.size();i++){
+        for (int i = 0; i < decks.size(); i++) {
             decks.get(i).log();
         }
     }
@@ -177,11 +183,11 @@ public class CardGame {
      */
     public void runGame() throws IOException {
         // For loop to check if any player has a winning hand at the start
-        for (int i=0;i<players.size();i++){
+        for (int i = 0; i < players.size(); i++) {
             players.get(i).checkWin();
         }
         // For loop that starts the player threads to play
-        for (int i=0;i<players.size();i++){
+        for (int i = 0; i < players.size(); i++) {
             players.get(i).start();
         }
     }
@@ -193,8 +199,8 @@ public class CardGame {
         this.players = new ArrayList<Player>();
         this.decks = new ArrayList<Pack.CardDeck>();
     }
-    
-    public static void main(String args[]) throws IOException{
+
+    public static void main(String args[]) throws IOException {
         CardGame game = new CardGame();
         game.initializeGame();
         game.runGame();
