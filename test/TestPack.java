@@ -15,7 +15,7 @@ public class TestPack {
         Card n4 = new Card(4);
         Card n5 = new Card(5);
 
-        pack1 = new Pack("test/testPack.txt");
+        pack1 = new Pack("testPack.txt");
 
         pack1.getPack().add(n1);
         pack1.getPack().add(n2);
