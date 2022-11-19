@@ -1,10 +1,11 @@
 import static org.junit.Assert.*;
 import java.io.IOException;
+
 import org.junit.*;
 
 public class TestPack {
 
-    private Pack pack1;
+    private MockPack pack1;
     private int[] correct1;
 
     @Before
@@ -15,7 +16,7 @@ public class TestPack {
         Card n4 = new Card(4);
         Card n5 = new Card(5);
 
-        pack1 = new Pack("testPack.txt");
+        pack1 = new MockPack();
 
         pack1.getPack().add(n1);
         pack1.getPack().add(n2);
