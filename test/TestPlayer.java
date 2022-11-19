@@ -85,6 +85,8 @@ public class TestPlayer {
     public void testCheckWin() throws IOException{
         assertEquals(player1.getWinner(),0);
         assertEquals(player2.getWinner(),0);
+        //The players aren't stored in the game array list in this test
+        //Hence player2.checkwin() doesnt affect player 1's winner attribute because the game class cannot access any players
         player1.checkWin();
         player2.checkWin();
         assertEquals(player1.getWinner(),0);
@@ -98,6 +100,7 @@ public class TestPlayer {
         assertEquals(invalidDeck.getDeck().size(),2);
         assertEquals(player3.elements(),"3 3 3 1 ");
         player1.cardDrawDisc();
+        //Nothing should change here because player1 is attempting to draw from a deck with less than 4 cards
         assertEquals(deck.getDeck().size(),3);
         assertEquals(invalidDeck.getDeck().size(),2);
         assertEquals(player1.elements(),"1 2 3 4 ");

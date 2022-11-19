@@ -6,6 +6,7 @@ import org.junit.Test;
 
 public class TestCardGame {
     private CardGame game;
+    //player1 and deck1 are the correct representations of what the tests should produce
     private Player player1;
     private Pack.CardDeck deck1;
     

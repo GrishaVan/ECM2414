@@ -15,4 +15,9 @@ public class TestCard {
     public void testGetValue() {
         assertEquals(card0.getValue(),1);
     }
+
+    @After
+    public void cleanUp(){
+        card0=null;
+    }
 }

@@ -6,6 +6,7 @@ import org.junit.*;
 public class TestPack {
 
     private MockPack pack1;
+    //correct1 is the correct values of pack1 in an array
     private int[] correct1;
 
     @Before
@@ -33,6 +34,7 @@ public class TestPack {
 
     @Test
     public void testGetPack(){
+        //Checking each value matches the correct values
         for(int i=0;i<5;i++){
             assertEquals(pack1.getPack().get(i).getValue(),correct1[i]);
         }

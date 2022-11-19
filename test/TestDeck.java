@@ -22,6 +22,7 @@ public class TestDeck {
         deck1.addCardDeck(n2);
         deck1.addCardDeck(n3);
         deck1.addCardDeck(n4);
+        //Array shows what should be the correct values of deck1
         correct1 = new int[] {1,2,3,4};
 
         deck2 = new Pack.CardDeck(2);
@@ -35,6 +36,8 @@ public class TestDeck {
 
     @Test
     public void testGetDeck(){
+        assertEquals(deck1.getDeck().size(),4);
+        //Checking values of deck against correct values
         for(int i=0;i<4;i++){
             assertEquals(deck1.getDeck().get(i).getValue(),correct1[i]);
         }
