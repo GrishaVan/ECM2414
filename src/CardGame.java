@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CardGame {
@@ -84,10 +85,23 @@ public class CardGame {
         File file = new File(fileName);
         // Check if a file exists
         if (file.exists()) {
-            this.pack = new Pack(fileName);
-            // Check that pack confirms with size 8 * playerNum
-            if (this.pack.getPackSize() == 8 * playerNum) {
-                return true;
+            boolean onlyInts=true;
+            Scanner scanner = new Scanner(new File(fileName));
+            // Check if there are still values to be read from the file
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                //checking theyre are only digits entered in the pack file
+                if(line.matches("[0-9]+")==false){
+                    return false;
+                }
+            }
+            scanner.close();
+            if(onlyInts){
+                this.pack = new Pack(fileName);
+                // Check that pack confirms with size 8 * playerNum
+                if (this.pack.getPackSize() == 8 * playerNum) {
+                    return true;
+                }
             }
         }
         return false;
@@ -101,10 +115,25 @@ public class CardGame {
     public void initializeGame() throws IOException {
         int playerNum = 0;
         String file = "";
+        boolean validNum = false;
         // System asks how many players participating
-        System.out.println("Please enter the number of players");
         Scanner scanner = new Scanner(System.in);
-        playerNum = scanner.nextInt();
+
+        //Will repeat request until a valid number is entered
+        while(!validNum){
+            try{
+                System.out.println("Please enter a valid number of players");
+                playerNum = scanner.nextInt();
+                if(playerNum>1){
+                        validNum=true;
+                }
+            }
+            //catches if a non int is entered
+            catch(InputMismatchException e){
+                System.out.println("Invalid input");
+                scanner.next();
+            }
+        }
         // System asks for the pack file location
         System.out.println("Please enter the location of pack to load");
         if (scanner.hasNextLine()) {
@@ -131,7 +160,7 @@ public class CardGame {
         for (int i = 0; i < playerNum; i++) {
             // Check if last player
             if (i != playerNum - 1) {
-                // Lats player discards to deck 1
+                // Lets player discards to deck 1
                 Player player = new Player(i + 1, decks.get(i), decks.get(i + 1), this);
                 players.add(player);
             } else {
