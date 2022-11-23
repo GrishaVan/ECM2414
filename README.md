@@ -29,7 +29,7 @@ Add Junit to the java project class path
 - The system will ask you to input the number of players participating in the game
 - The system will then ask you to input a valid file with the values of the crads to be added to the pack
 - **MAKE SURE** the pack file contains 8 * the number of players playing
-- **MAKE SURE** the pack file exits within the src folder, **Should** be inputed in format src/
+- **MAKE SURE** the pack file exits within the same directory as the jar file
 - The system will only start he game once every input has been validated
 - After the game finishes the player and card deck log files will be created with every action of the game
 
