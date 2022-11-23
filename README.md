@@ -43,7 +43,7 @@ Add Junit to the java project class path
 - There is also a folder containing all of our unit tests for each class which can be used to debug functions
 
 ### Testing 
-- **MAKE SURE** JUnit is in the java project class path
+- **MAKE SURE** JUnit 4 is in the java project class path
 - Open the test folder within the project
 - Individual test files for every class have been created and so has a test suite will every class
 - Individual methods as entire class methods can be tested
