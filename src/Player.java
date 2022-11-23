@@ -83,6 +83,10 @@ public class Player extends Thread {
      * @throws IOException cannot log to a file
      */
     public void checkWin() throws IOException {
+        //Attempts to combat issue where two players declare their win because of thread scheduling
+        if(winner != 0){
+            return;
+        }
         Card n = playerHand.get(0);
         int value = n.getValue();
         // For loop that looks through every card in the player hand
@@ -93,10 +97,13 @@ public class Player extends Thread {
                 return;
             }
         }
+        //Allows only one declaration to occur
+        synchronized(this){
         System.out.println("Player " + playerNum + " wins");
         // Player declares win and tells the other players
         game.declareWin(playerNum);
         this.winner = playerNum;
+        }
     }
 
     /**
