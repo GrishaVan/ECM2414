@@ -1,5 +1,0 @@
-Player 2 initial hand 2 2 3 3 
-
-Player 1 has informed 2 that player 1 has won
-Player 2 exits
-Player 2 final hand: 2 2 3 3 
